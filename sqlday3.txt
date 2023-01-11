@@ -1,0 +1,11 @@
+SELECT * FROM orderr
+WHERE customer in (select id 
+FROM  customer WHERE phone='3423567568');
+
+SELECT*FROM  product WHERE category='portable';
+
+SELECT *FROM  orderr
+WHERE customer in(SELECT id FROM customer WHERE country not like 'german');
+
+SELECT * FROM  orderr
+WHERE id in (SELECT orderid FROM  orderitem WHERE productid in (SELECT id FROM  product WHERE productname like 'table'));

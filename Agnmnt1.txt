@@ -1,0 +1,82 @@
+CREATE TABLE Customer (Id int Primary Key,FirstName nvarchar(40),LastName nvarchar(40),City nvarchar(40),Country nvarchar(40),Phone nvarchar(20));
+CREATE TABLE Order1 (Id int Primary Key,Orderdate datetime, OrderNumber nvarchar(10),CustomerId int,TotalAmount decimal(12,2));
+CREATE TABLE OrderItem(Id int Primary Key,OrderId int ,ProductId int,UnitPrice decimal(12,2),Quality int);
+CREATE TABLE Product(Id int Primary Key ,ProductName nvarchar(50),UnitPrice decimal(12,2),Package int,IsDiscontinued bit);
+
+
+ALTER TABLE Order1
+ADD FOREIGN KEY (CustomerId) REFERENCES Customer(Id);
+
+ALTER TABLE OrderItem
+ADD FOREIGN KEY (OrderId) REFERENCES Orders(Id);
+
+ALTER TABLE OrderItem
+ADD FOREIGN KEY (ProductId) REFERENCES Product(Id);
+
+
+INSERT INTO product
+VALUES (101, 'Laptop', 50000, 'Cardboard', 0),
+(102, 'Mobile', 20000, 'Box', 0),
+(103, 'Tab', 22000, 'Cardboard', 0),
+(104, 'Desktop', 30000, 'Cardboard', 0),
+(105, 'Earpods', 2000, 'Box', 0),
+(106, 'Mouse', 1000, 'Box', 1);
+
+ 
+INSERT INTO product
+VALUES (107,'GGHC',43234, 'FF',1);
+
+ 
+SELECT * FROM product
+
+ 
+INSERT INTO customer
+VALUES (201, 'Sita', 'Devi', 'Banglore', 'India', '9876543210'),
+(202, 'Sai', 'Sri', 'Banglore', 'India', '7852656548'),
+(203, 'Lakshmana', 'Sri', 'Banglore', 'India', '9566577877');
+
+ 
+SELECT * FROM customer;
+
+
+INSERT INTO orderr
+VALUES (301, '2023-01-09 11:30', '565333', '201', 51000),
+(302, '2023-01-09 06:45', '734664', '202', 20000),
+(303, '2023-01-01 08:34', '464546', '203', 54000);
+
+ 
+INSERT INTO orderItem
+VALUES (401, 301, 101, 50000, 1),
+(402, 301, 106, 1000, 1),
+(403, 302, 102, 20000, 1),
+(404, 303, 103, 22000, 1),
+(405, 303, 104, 30000, 1),
+(406, 303, 105, 2000, 1);
+
+ 
+SELECT * FROM orderItem;
+SELECT * FROM orderr;
+SELECT * FROM customer;
+SELECT * FROM product;
+
+
+INSERT INTO customer
+VALUES (205, 'NULL', NULL, 'somewhere', 'India', '3456366666');
+
+ 
+
+INSERT INTO orderr
+VALUES (434,'NULL', 222, 201, 2333)
+
+ 
+
+SELECT country FROM customer 
+WHERE firstName LIKE 'I%' OR firstName LIKE 'S%';
+
+ 
+
+SELECT * FROM customer 
+WHERE firstName LIKE '__i%';
+
+
+

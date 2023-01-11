@@ -1,0 +1,108 @@
+CREATE TABLE Employee(Id int NOT NULL Primary Key,FirstName nvarchar(30),LastName nvarchar(30),ManagerId int);
+CREATE TABLE Manager(Id int NOT NULL Primary Key,FirstName nvarchar(30),LastName nvarchar(50),DepId int);
+CREATE TABLE Department(DepId int Primary Key,DepName nvarchar(30));
+
+ALTER TABLE Employee
+ADD FOREIGN KEY (ManagerId) REFERENCES Manager(Id);
+
+ALTER TABLE Manager
+ADD FOREIGN KEY (DepId) REFERENCES Department(DepId);
+
+SELECT *FROM Customer
+WHERE Country = Germany;
+
+SELECT * FROM customer 
+WHERE FirstName LIKE '_u%';
+
+SELECT OrderDetail
+FROM OrderItem
+WHERE unitprice >10 AND UnitPrice<20;
+
+SELECT Shipping Date
+FROM OrderItem
+ORDER BY date
+
+ 
+SELECT * FROM customer;
+SELECT country from customer 
+WHERE country='german';
+SELECT firstname,lastname,firstname+' '+lastname as fullname from customer;
+
+ALTER table customer
+ADD faxnumber nvarchar(50);
+
+SELECT*  FROM customer;
+
+UPDATE customer SET faxnumber=+81-362-456789
+WHERE Id=2;
+
+UPDATE customer SET faxnumber=+91-362-456789
+WHERE Id=1;
+
+SELECT *  FROM customer WHERE faxnumber is not null;
+SELECT *  FROM customer WHERE faxnumber is null;
+
+SELECT *  FROM customer WHERE firstname like'__r%';
+
+SELECT *  FROM orderitem;
+SELECT * FROM orders WHERE id IN (select orderid from orderitem where unitprice between 106 and 10001); 
+
+ALTER table orders
+ADD shippingdate datetime;
+
+SELECT *  FROM orders;
+UPDATE orders 
+SET shippingdate='2022-09-09'
+WHERE id = '120';
+
+UPDATE orders 
+SET shippingdate='2022-09-04'
+WHERE id = '121';
+
+UPDATE orders 
+SET shippingdate='2022-09-04'
+WHERE id = '119';
+
+SELECT *  FROM orders
+WHERE shippingdate is not null
+ORDER BY shippingdate desc;
+
+ALTER table orders
+ADD shipname varchar(50);
+
+SELECT * FROM orders;
+SELECT * FROM orderitem;
+SELECT * FROM product;
+
+UPDATE orders SET shipname =' star'
+WHERE id =120;
+
+SELECT *FROM orders where shipname like ' star' and (shippingdate between '2022-09-03' and '2022-09-10');
+
+SELECT productid, avg(quantity) as average FROM orderitem
+GROUP BY productid;
+
+ALTER table orders
+ADD shippingcompany varchar(30);
+
+UPDATE orders set shippingcompany = 'amazon'
+WHERE id = 120;
+SELECT shippingcompany, shipname FROM orders where shipname is not null;
+
+ALTER table product
+ADD category varchar(30);
+
+UPDATE product set category ='portable'
+WHERE id =106;
+
+ALTER table product
+ADD discount int;
+
+update product
+set discount = 0
+WHERE id =106;
+
+SELECT productname, category, unitprice - discount as price from product;
+
+SELECT shippingcompany, totalamount as totalprice from orders
+WHERE shippingcompany like 'amazon' and totalamount > 1000;
